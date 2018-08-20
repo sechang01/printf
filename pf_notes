@@ -1,0 +1,187 @@
+
+
+
+
+
+Just allocate a character array to hold the result, divide
+the number by ten, keep the remainder, add x30 to
+it, and store it at the end of the array. Repeat the
+process until all the digits are found. Then print it.
+
+
+To identify the start of the string, we put a doublequote
+(") at the front.
+
+To identify the end of the
+string we put another double-quote at the end.
+
+C uses backslash (virgule, \) as
+an escape character to change the meaning of the
+next character after it. Thus, to print a doublequote
+you type in backslash double-quote. To print
+a backslash, you must escape it by typing another
+backslash in front of it.
+
+The first backslash means
+“give the next character its alternate meaning.”
+
+Partial  list of escape characters:
+\ escape the next character
+\\ print a backslash
+" start or end of string
+\" print a double quote
+’ start or end a character constant
+\’ print a single quote
+% start a format specification
+\% print a percent sign
+
+Partial list of backslash commands:
+\a audible alert (bell)
+\b backspace
+\f form feed
+\n newline (linefeed)
+\r carriage return
+\t tab
+\v vertical tab
+
+
+The real power of printf is when we are printing the
+contents of variables.
+
+When it finds a percent it knows it
+has a format specification.
+
+It is okay to include more than one format speci-
+fication in the printf string.
+
+Every format specification starts with a percent sign
+and ends with a letter.
+
+%c print a single character
+%d print a decimal (base 10) number
+%e print an exponential floating-point number
+%f print a floating-point number
+%g print a general-format floating-point number
+%i print an integer in base 10
+%o print a number in octal (base 8)
+%s print a string of characters
+%u print an unsigned decimal (base 10) number
+%x print a number in hexidecimal (base 16)
+%% print a percent sign (\% also works)
+
+Notice that in the simple, %d way, there is no predetermined
+size for the result. printf simply takes
+as much space as it needs.
+
+
+
+To print a number with a certain (minimum)
+width, say 5 spaces wide, the format specifier is %5d.
+Here are some sample cases and results. (We will
+use the symbol to explicitly indicate a space.)
+printf produces
+("%5d",0) _ _ _ _ 0 (leading spaces, no underscores)
+("%5d",-7) _ _ _ -7
+("%5d",1560133635) 1560133635 (no spaces, full number is printed)
+("%5d",-2035065302) -2035065302
+
+Filling in Extra Space
+**open ended?**
+printf provides space fill (left or right) and zero
+fill (left only). If you want check protection or centering
+you need to make other arrangements. But
+even without check protection or centering printf
+still has an impressive (and bewildering) collection
+of options.
+
+
+Using printf numbers can be left-justified (printed
+in the left side of the field) or right-justified (printed
+in the right side of the field). The most natural way
+to print numbers seems to be right-justified with
+leading spaces. That is what %5d means: print a
+base-10 number in a field of width 5, with the number
+right-aligned and front-filled with spaces.
+To make the number left-aligned, a minus sign is
+added to the format specifier.
+
+To print a number 5
+spaces wide and left-justified (left-aligned) the format
+specifier is %-5d. Here are some sample cases
+and results.
+
+printf produces
+("%-5d",0) 0 _ _ _ _
+("%-5d",-7) -7 _ _ _
+("%-5d",1560133635) 1560133635
+("%-5d",-2035065302) -2035065302
+
+The Zero-Fill Option
+
+Fun With Plus Signs
+
+Negative numbers always print with a minus sign.
+Positive numbers and zero usually do not print with
+a sign, but you can request one. A plus (+) in the
+format specifier makes that request.
++ sign right aligned
+zero is treated as a positive number, _ _ _ + 0
+
+printf produces
+("%+5d",0) +0
+("%+5d",-7) -7
+("%+5d",1560133635) +1560133635
+("%+5d",-2035065302) -2035065302
+Notice that zero is treated as a positive number.
+Shorter numbers are padded. Longer numbers are
+unchanged.
+Plus and minus are not related. Both can appear
+in a format specifier.
+
+The Invisible Plus Sign
+
+Plus, Space, Zero
+
+
+escape function: \ %%
+
+look for begin (%)
+	strchr or while s[i++]
+
+look for flags
+	#, 0, -, +, _
+	what if 2 flags? handle it.
+	what's the priority?
+	check for - first.
+	- cancels 0
+	+ cancels _
+
+str[20] = .......... ........... ....... . . .;
+minimum field witdh =
+int max?
+
+
+
+look for minimum field width
+	up to 14? 2 length?
+	107..... maximum? ask jonathan
+int max?
+
+look for precision . identifier
+	3 length?
+
+
+look for length
+	2 length?
+	table of results?
+
+look for null (type)
+while g_type[i++] is not null
+	function pointer from dispatcher.
+
+
+modify and store function, utilizing all coefficient searches
+
+
+questions:
+priority of flags?%
