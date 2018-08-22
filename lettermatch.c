@@ -6,23 +6,30 @@
 /*   By: sechang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 18:06:40 by sechang           #+#    #+#             */
-/*   Updated: 2018/08/19 17:28:08 by sechang          ###   ########.fr       */
+/*   Updated: 2018/08/20 18:19:07 by sechang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+void		initzero(t_flag *mods)
+{
+	mods->width = 0;
+	mods->preci = 0;
+	mods->space = 0;
+}
+
 // c = iniitalize all to null;
 // a = check first set (flags);
 // b = check second set (modifiers);
-t_flag 	flagnlen(t_flag *match, char c, char key)
+t_flag chrfmt(t_flag *match, char c, char key)
 {
-//		t_flags 	match;
+//	10 chars 0 - 9
 		int			i;
 
 		if (key == 'c' && (i = 0)) // i = 0 is positive?
 		{
-			while (i < 9)
+			while (i <= 10)
 				match->flag[i++] = '\0';
 		}
 		if (key == 'a')
@@ -60,3 +67,33 @@ int		fmt_found(char c)
 			|| c == 'o' || c == 'O' || c == 'u' || c == 'U' || c == 'x' \
 			|| c == 'X' || c == 'c' || c == 'C');
 }
+/*
+t_flag (t_flag *mtch, char c, char key)
+{
+//		10 - 22, 13 chars, + null;
+		int			i;
+
+		if (key == 'c' && (i = 10)) // i = 0 is positive?
+		{
+			while (i <= 23)
+				mtch->flag[i++] = '\0';
+		}
+		if (key == 'a')
+		{
+			mtch->varg = (c == 's') ? va_arg(vg, char *) : g[10];
+			mtch->flag[11] = (c == 'S') ? mtch->flag[11] + 1 : mtch->flag[11];
+			mtch->flag[12] = (c == 'p') ? mtch->flag[12] + 1 : mtch->flag[12];
+			mtch->flag[13] = (c == 'D') ? mtch->flag[13] + 1 : mtch->flag[13];
+			mtch->flag[14] = (c == 'i') ? mtch->flag[14] + 1 : mtch->flag[14];
+			mtch->flag[15] = (c == 'o') ? mtch->flag[15] + 1 : mtch->flag[15];
+			mtch->flag[16] = (c == 'O') ? mtch->flag[16] + 1 : mtch->flag[16];
+			mtch->flag[17] = (c == 'u') ? mtch->flag[17] + 1 : mtch->flag[17];
+			mtch->flag[18] = (c == 'U') ? mtch->flag[18] + 1 : mtch->flag[18];
+			mtch->flag[19] = (c == 'x') ? mtch->flag[19] + 1 : mtch->flag[19];
+			mtch->flag[20] = (c == 'X') ? mtch->flag[20] + 1 : mtch->flag[20];
+			mtch->flag[21] = (c == 'c') ? mtch->flag[21] + 1 : mtch->flag[21];
+			mtch->flag[22] = (c == 'C') ? mtch->flag[22] + 1 : mtch->flag[22];
+		}
+		return (*mtch);
+}
+*/
