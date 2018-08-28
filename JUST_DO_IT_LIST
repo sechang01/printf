@@ -1,0 +1,30 @@
+Modifiers
+
+test each case again
+
+remove debug and 42fc
+
+widechar?
+
+
+
+
+To fix something, I broke preci. Needs rework.
+Remake x preci function?
+preci default value of 0 is the problem.
+
+
+
+
+
+
+
+
+
+=====================================
+DONE:
+
+for precision < strlen
+
+strlen still gets the whole strlen when it needs preci
+else the width messes up
