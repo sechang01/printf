@@ -6,7 +6,7 @@
 /*   By: sechang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/19 17:38:34 by sechang           #+#    #+#             */
-/*   Updated: 2018/08/27 23:53:52 by sechang          ###   ########.fr       */
+/*   Updated: 2018/08/30 22:54:50 by sechang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,19 @@ void		printf_c(t_flag *mods)
 			unsigned char 	x;             // 4 bytes for unicode
 
 //			printf("Entering printf.c\n");
-			width_n_c(mods, 1, 'a');
-
-			x = (unsigned char)(va_arg(mods->vg, int));
-//			if (mods->flag[10] == 'S')
-//				mods->store->buf[mods->i++] = x;
-
+//			width_n_c(mods, 1, 'a');
+			if (mods->flag[10] != '%')
+				x = (unsigned char)(va_arg(mods->vg, int));
+			else
+				x = '%';
+			if (mods->flag[3] == 0)
+			{
+				width_n_c(mods, 1, 'n');
+			}
 			mods->store->buf[mods->i++] = x;
+			if (mods->flag[3] > 0)
+				width_n_c(mods, 1, 'n');
+
 //			printf("printout:%s\n", mods->store->buf);
 }
 
@@ -36,28 +42,32 @@ void		printf_s(t_flag *mods)
 
 		i = 0;
 		x = NULL;
-		printf("Entering printf.s\n");
+//		printf("Entering printf.s\n");
 //		printf("matchflag3 = %d", mods->flag[3]);
 		tmp = va_arg(mods->vg, char *);
 //		printf("~~~~~~~ tmp = %s\n", tmp);
-		len = ((unsigned long)ft_strlen(tmp) > mods->preci) ? mods->preci : \
-			  ft_strlen(tmp);
+		if ((unsigned long)ft_strlen(tmp) == 0)
+			len = 0;
+		else
+			len = ((unsigned long)ft_strlen(tmp) > mods->preci) ? \
+			  (unsigned long)ft_strlen(tmp) - mods->preci : (unsigned long)ft_strlen(tmp) - mods->preci;
+//		if (len < 0)
+//			len = 0;
 //		printf("--- len = %ld\n", len);
 		x = ft_strsub((char const*) tmp, 0, (size_t)len);
 //		printf("~~~~~~~ X = %s\n", tmp);
 		if (mods->flag[3] == 0)
-			width_n_c(mods, len, 'n');
+			width_n_c(mods, len, 'c');
 //		if (mods->flag[4] > 0) // only for signed #
 //			mods->store->buf[mods->i++] = '+';
 //		if (mods->flag[5] > 0 && mods->flag[4] == 0) // only for signed #
 //			mods->store->buf[mods->i++] = ' ';
-		while (*x)// && i++ < mods->preci) //&& ((mods->preci)) && i++ <= mods->preci)
-		{
-			mods->store->buf[mods->i++] = *x;
-			x++;
-		}
+		if (mods->preci > 0)
+			x[mods->preci] = '\0';
+		while (*x)
+			mods->store->buf[mods->i++] = *x++;
 		if (mods->flag[3] > 0)
-			width_n_c(mods, len, 'n');
+			width_n_c(mods, len, 'c');
 //		printf("printout:%s\n", mods->store->buf);
 }
 
@@ -67,7 +77,7 @@ void		printf_big_s(t_flag *mods)
 //			int		*i;
 
 //			printf("Entering printf.c\n");
-			width_n_c(mods, 1, 'a');
+			width_n_c(mods, 1, 'n');
 
 			x = (va_arg(mods->vg, wchar_t *));
 			

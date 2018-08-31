@@ -6,7 +6,7 @@
 /*   By: sechang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 18:06:40 by sechang           #+#    #+#             */
-/*   Updated: 2018/08/27 19:41:21 by sechang          ###   ########.fr       */
+/*   Updated: 2018/08/29 22:23:22 by sechang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_flag chrfmt(t_flag *match, char c, char key)
 		}
 		if (key == 'a')
 		{
-			match->flag[0] = (c == '%') ? match->flag[0] + 1 : match->flag[0];
+			match->flag[0] = (c == '.') ? match->flag[0] + 1 : match->flag[0];
 			match->flag[1] = (c == '#') ? match->flag[1] + 1 : match->flag[1];
 			match->flag[2] = (c == '0') ? match->flag[2] + 1 : match->flag[2];
 			match->flag[3] = (c == '-') ? match->flag[3] + 1 : match->flag[3];
@@ -55,7 +55,7 @@ t_flag chrfmt(t_flag *match, char c, char key)
 
 int		flag_found(char c)
 {
-	return (c == '%' || c == '#' || c == '0' || c == '-' || c == '+' || c == ' ');
+	return (c == '#' || c == '0' || c == '-' || c == '+' || c == ' ');
 }
 
 int		len_found(char c)
@@ -67,5 +67,5 @@ int		fmt_found(char c)
 {
 	return (c == 's' || c == 'S' || c == 'p' || c == 'D' || c == 'i' \
 			|| c == 'o' || c == 'O' || c == 'u' || c == 'U' || c == 'x' \
-			|| c == 'X' || c == 'c' || c == 'C');
+			|| c == 'X' || c == 'c' || c == 'C' || c == '%');
 }

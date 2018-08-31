@@ -6,12 +6,13 @@
 /*   By: sechang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/15 15:15:24 by sechang           #+#    #+#             */
-/*   Updated: 2018/08/27 23:56:50 by sechang          ###   ########.fr       */
+/*   Updated: 2018/08/30 22:54:53 by sechang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "dispatch.h"
+#include "libft/libft.h"
 
 void		prntout(t_printbuf otpt)
 {
@@ -35,7 +36,7 @@ int		parse(char **s, t_flag *mods)
 		{
 			return (0);  //return what?.
 		}
-		if (*(*s) == '%')
+		if (*(*s) == '%' && ((*s)++))
 		{
 //			printf("%% Found\n");
 			chrfmt(mods, 0, 'c');
@@ -68,9 +69,11 @@ int		parse(char **s, t_flag *mods)
 					(*s)++;
 				}
 //				printf("*s= %s\n", s);
+				if (mods->preci > 0)
+					mods->flag[2] = 0;
 			}
 //			printf("Field Preci=\t%lu\n", mods->preci);
-			while (flag_found(*(*s)))
+			while (len_found(*(*s)))
 			{
 //				printf("Modifier Found\n");
 				chrfmt(mods, *(*s), 'b');
@@ -78,21 +81,24 @@ int		parse(char **s, t_flag *mods)
 				(*s)++;
 			}
 			g = 0;
-//			printf("------: %c\n", s);
-			while (g < 15 && *(*s) != g_type[g++].fmt)
+//			printf("------: %c\n", (*(*s)));
+			while (g <= 15) // && *(*s) != g_type[g].fmt)
 			{
 				//getchar();
-//				printf("g=%d, *s= %c, g_type[g]=%c\n", g, *s, g_type[g].fmt);
-		//		printf("Dispatch Table - Format\n");
+//				printf("g=%d, *s= %c, g_type[g]=%c\n", g, *(*s), g_type[g].fmt);
+				
+//				printf("Dispatch Table - Format\n");
 //				s++;
-			}
-//			printf("g=%d\n", g);
-			if (g < 15 && (mods->flag[10] = g_type[--g].fmt))
-			{
-			//		printf("~~~~~~~~~~~~~Format Found:  %c\n", mods->flag[10]);
+//				printf("g=%d\n", g);
+				if (*(*s) == g_type[g].fmt)
+				{
+					mods->flag[10] = g_type[g].fmt;
+//					printf("~~~~~~~~~~~~~Format Found:  %c\n", mods->flag[10]);
 					g_type[g].f(mods);
-			}
+				}
+				g++;
 //			printf("end\n");
+			}
 		}
 		return (0);
 }
@@ -125,11 +131,12 @@ int		store_to_buf(char *s, t_flag *mods)
 //			mods->i++;
 		}
 //		printf("*S read finished\n");
-		mods->store->len = ft_strlen(mods->store->buf);
-//		printf("strlen= %d", mods->store->len);
+		mods->store->len = mods->i; 
+//		printf("%s\n", mods->store->buf);
+//		printf("strlen= %d\n", mods->store->len);
 		mods->store->buf[mods->store->len + 1] = '\0';
 		prntout(*mods->store);
-		return (0);
+		return (mods->store->len);
 }
 
 //dealing with argument 2+ as variables or not variables.
@@ -142,6 +149,6 @@ int		ft_printf(const char *s, ...)
 		return (0);
 //	mods->s_ptr = &s;
 	va_start(mods->vg, s);
-		store_to_buf((char *)s, mods);
-	return (0);
+	return (store_to_buf((char *)s, mods));
+//	return (0);
 }

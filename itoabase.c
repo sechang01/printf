@@ -6,7 +6,7 @@
 /*   By: sechang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 20:18:57 by sechang           #+#    #+#             */
-/*   Updated: 2018/08/27 19:41:12 by sechang          ###   ########.fr       */
+/*   Updated: 2018/08/29 20:26:19 by sechang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,16 @@ char	*itoabase(unsigned long long n, int base, char key)
 //	if (n < 0 && base == 10 && (len++) && (str[0] = '-'))
 //		n_cpy = -n;
 	
-	printf("len = %lu\n", len);
+//	printf("len = %lu\n", len);
 	str[len] = '\0';
 	str[--len] = (key == 'A') ? g_hex_upp[n_cpy % (unsigned long long)base] : \
 				 g_hex_low[n_cpy % (unsigned long long)base];
-	printf("str[%lu] = %c\n", len, str[len]);
+//	printf("str[%lu] = %c\n", len, str[len]);
 	while (n_cpy /= (unsigned long long)base)
 	{
 		str[--len] = (key == 'A') ? g_hex_upp[n_cpy % (unsigned long long)\
 					 base] : g_hex_low[n_cpy % (unsigned long long)base];
-		printf("str[%lu] = %c\n", len, str[len]);
+//		printf("str[%lu] = %c\n", len, str[len]);
 	}
 //	if (n < 0)
 //		return (base == 10) ? (str) : (str);

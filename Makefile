@@ -6,34 +6,40 @@
 #    By: sechang <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/15 16:05:33 by sechang           #+#    #+#              #
-#    Updated: 2018/08/24 17:05:02 by sechang          ###   ########.fr        #
+#    Updated: 2018/08/31 00:00:58 by sechang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ft_printf.a
+NAME = libftprintf.a
 FLAGS = -Wall -Wextra -Werror
-CC = gcc
 
-OPTION = -c -I
+SRC = ft_printf.c \
+	  lettermatch.c \
+	  fmtr.c \
+	  charific.c \
+	  numeric.c \
+	  octdechex.c \
+	  itoabase.c \
+	  ft_bzero.c \
+	  ft_get_intlen.c \
+	  ft_isdigit.c \
+	  ft_itoa.c \
+	  ft_strcpy.c \
+	  ft_strlen.c \
+	  ft_strsub.c 
 
-SRC = ft_printf.c lettermatch.c fmtr.c charific.c numeric.c octdechex.c itoabase.c
 OBJ = $(SRC:.c=.o)
-
 all: $(NAME)
 
-$(NAME):
-	make -C libft/
-	$(CC) $(FLAGS) -I ./libft/includes/ -c $(SRC)
+$(NAME): 
+	gcc $(FLAGS) -c $(SRC)
 	ar rc $(NAME) $(OBJ)
-	ranlib $(NAME)
-	gcc -g main.c $(SRC) ./libft/libft.a
-
+	ranlib $(NAME)	
+	gcc $(FLAGS) main.c $(SRC) $(NAME)
 clean:
-	make -C libft/ clean
 	/bin/rm -f $(OBJ)
 
 fclean: clean
-	make -C libft/ fclean
 	/bin/rm -f $(NAME)
 
 re: fclean all

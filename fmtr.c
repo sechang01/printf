@@ -6,7 +6,7 @@
 /*   By: sechang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/19 17:39:49 by sechang           #+#    #+#             */
-/*   Updated: 2018/08/27 23:55:40 by sechang          ###   ########.fr       */
+/*   Updated: 2018/08/31 00:00:53 by sechang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,27 @@
 int		width_n_c(t_flag *mods, unsigned long long len, char key)
 {
 	unsigned long long		twidth;
+	unsigned long			i;
 
+	i = 0; //(mods->preci > len) ? mods->preci - len : 0;
 	if (key == 'n')
 		twidth = (mods->width > mods->preci) ? mods->width : mods->preci;
 	else
 		twidth = mods->width;
 //	printf("Entered W_a_b\n");
 //	printf("Width= %lu\n", mods->width);
-//	printf("Preci= %lu\n", mods->preci);
-//	printf("flag2: %d\n", mods->flag[2]);
-//	printf("flag3: %d\n", mods->flag[3]);
+	printf("Twidth= %llu\n", twidth);
+	printf("pre-len=%llu\n", len);
+	printf("Preci= %lu\n", mods->preci);
+	printf("flag2: %d\n", mods->flag[2]);
+	printf("flag3: %d\n", mods->flag[3]);
 	mods->space = ((mods->flag[2] > 0) && (mods->flag[3] == 0)) ? '0' : ' ';
-//	printf("Modspace = %c\n", mods->space);
+	printf("Modspace = %c\n", mods->space);
 	while (twidth > len++)
 	{
-		if (key == 'n' && mods->i <= mods->preci)
-			mods->store->buf[mods->i++] = '0';
-		else
 			mods->store->buf[mods->i++] = mods->space;
 	}
-	return 0;
+	return (0);
 }
 
 // flag 6 = 'h'
@@ -47,18 +48,18 @@ int		width_n_c(t_flag *mods, unsigned long long len, char key)
 char	*numx(t_flag *mods)
 {
 	if (mods->flag[8] >= 1)
-		return (imax_itoa((intmax_t)(va_arg(mods->vg, intmax_t))));
+		return (imax_itoa((va_arg(mods->vg, intmax_t))));
 	if (mods->flag[7] >= 2)
-		return (imax_itoa((intmax_t)(va_arg(mods->vg, long long))));
+		return (imax_itoa((va_arg(mods->vg, long long))));
 	if (mods->flag[7] == 1)
-		return (imax_itoa((intmax_t)(va_arg(mods->vg, long))));
+		return (imax_itoa((va_arg(mods->vg, long))));
 	if (mods->flag[9] >= 1)
-		return (imax_itoa((intmax_t)(va_arg(mods->vg, size_t))));
+		return (imax_itoa(va_arg(mods->vg, size_t)));
 	if (mods->flag[6] == 1)
-		return (imax_itoa((intmax_t)(va_arg(mods->vg, int))));
+		return (imax_itoa((short)(va_arg(mods->vg, int))));
 	if (mods->flag[6] >= 2)
-		return (imax_itoa((intmax_t)(va_arg(mods->vg, int))));
-	return (NULL);
+		return (imax_itoa(((char)(va_arg(mods->vg, int)))));
+	return (ft_itoa(va_arg(mods->vg, int)));
 }
 ///         The following length modifier is valid for the c or s conversion:
 
@@ -68,16 +69,26 @@ char	*numx(t_flag *mods)
 char	*ouxx(t_flag *mods, int base, char key)
 {
 	if (mods->flag[8] >= 1)
-		return (itoabase((unsigned long long)(va_arg(mods->vg, uintmax_t)), base, key));
+		return (itoabase((va_arg(mods->vg, uintmax_t)), base, key));
 	if (mods->flag[7] >= 2)
-		return (itoabase((unsigned long long)(va_arg(mods->vg, unsigned long long)), base, key));
+		return (itoabase((va_arg(mods->vg, unsigned long long)), base, key));
 	if (mods->flag[7] == 1)
-		return (itoabase((unsigned long long)(va_arg(mods->vg, unsigned long)), base, key));
+		return (itoabase((va_arg(mods->vg, unsigned long)), base, key));
 	if (mods->flag[9] >= 1)
-		return (itoabase((unsigned long long)(va_arg(mods->vg, size_t)), base, key));
+		return (itoabase((va_arg(mods->vg, size_t)), base, key));
 	if (mods->flag[6] == 1)
-		return (itoabase((unsigned long long)(va_arg(mods->vg, int)), base, key));
+		return (itoabase((unsigned short)(va_arg(mods->vg, int)), base, key));
 	if (mods->flag[6] >= 2)
-		return (itoabase((unsigned long long)(va_arg(mods->vg, int)), base, key));
+		return (itoabase((unsigned char)(va_arg(mods->vg, int)), base, key));
 	return (NULL);
+}
+
+unsigned long	preci(t_flag *mods, unsigned long len)
+{
+	while (mods->preci > len)
+	{
+		mods->store->buf[mods->i++] = '0';
+		len++;
+	}
+	return(len);
 }
