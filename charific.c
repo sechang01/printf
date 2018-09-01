@@ -6,7 +6,7 @@
 /*   By: sechang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/19 17:38:34 by sechang           #+#    #+#             */
-/*   Updated: 2018/08/31 21:10:48 by sechang          ###   ########.fr       */
+/*   Updated: 2018/08/31 22:20:43 by sechang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,11 @@ void		printf_s(t_flag *mods)
 
 		i = 0;
 		x = NULL;
+		if (mods->flag[7] > 0)
+		{
+			printf_big_s(mods);
+			return;
+		}
 //		printf("Entering printf.s\n");
 //		printf("matchflag3 = %d", mods->flag[3]);
 		tmp = va_arg(mods->vg, char *);
@@ -86,20 +91,9 @@ void		printf_s(t_flag *mods)
 void		printf_big_s(t_flag *mods)
 {
 			wchar_t 	*x;             // 4 bytes for unicode
-//			int		*i;
 
-//			printf("Entering printf.c\n");
-			width_n_c(mods, 1, 'n');
-
+//			width_n_c(mods, 1, 'n');
 			x = (va_arg(mods->vg, wchar_t *));
-			
-//			if (mods->flag[10] == 'C')
-//				mods->store->buf[mods->i++] = x;
 			while (*x)
-			{
-				mods->store->buf[mods->i++] = *x;
-				x++;
-			}
-//			mods->store->buf[mods->i++] = *x;
-//			printf("printout:%s\n", mods->store->buf);
+				mods->store->buf[mods->i++] = *x++;
 }

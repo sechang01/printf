@@ -6,7 +6,7 @@
 /*   By: sechang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/15 15:15:24 by sechang           #+#    #+#             */
-/*   Updated: 2018/08/31 18:52:54 by sechang          ###   ########.fr       */
+/*   Updated: 2018/08/31 22:11:48 by sechang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ int		store_to_buf(char *s, t_flag *mods)
 //			printf("mainloop-printout: %s\n", mods->store->buf);
 	//		printf("\t\t---------: %c\n", *s);
 	//		printf("%d--------: %c\n", mods->i, mods->store->buf[mods->i]);
-			if (mods->i >= 5000)
+			if (mods->i >= 9000)
 			{
 				mods->store->len = ft_strlen(mods->store->buf);
 				mods->store->buf[mods->store->len + 1] = '\0';

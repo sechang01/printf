@@ -19,15 +19,15 @@ int		main(void)
 //	ft_printf("%-5.3s", "LYDI");
 //	printf("\n");
 
-	printf("%s", "abc");
-	printf("\n");
-	ft_printf("%s", "abc");
-	printf("\n");
+//	printf("%s", "oiwejjdsaf;dajkadjeoiajr;ae*bib*");
+//	printf("\n");
+//	ft_printf("%s", "oiwejjdsaf;dajkadjeoiajr;ae*bib*");
+//	printf("\n");
 
-//	printf("%ls", L"@@");
-//	printf("\n");
-//	ft_printf("%ls", L"@@");
-//	printf("\n");
+	printf("%ls", L"@@");
+	printf("\n");
+	ft_printf("%ls", L"@@");
+	printf("\n");
 	
 /*
 	int		SHRT_MAX;
