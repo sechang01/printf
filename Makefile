@@ -6,7 +6,7 @@
 #    By: sechang <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/15 16:05:33 by sechang           #+#    #+#              #
-#    Updated: 2018/08/31 19:40:31 by sechang          ###   ########.fr        #
+#    Updated: 2018/08/31 21:11:05 by sechang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ $(NAME):
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)	
 #	gcc $(FLAGS) main.c $(SRC) $(NAME)
+	
 clean:
 	/bin/rm -f $(OBJ)
 

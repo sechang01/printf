@@ -6,7 +6,7 @@
 /*   By: sechang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/19 17:38:34 by sechang           #+#    #+#             */
-/*   Updated: 2018/08/31 18:14:33 by sechang          ###   ########.fr       */
+/*   Updated: 2018/08/31 21:10:48 by sechang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,23 +64,20 @@ void		printf_s(t_flag *mods)
 		if ((unsigned long)ft_strlen(tmp) == 0)
 			len = 0;
 		else
-			len = ((unsigned long)ft_strlen(tmp) > mods->preci) ? \
-			  (unsigned long)ft_strlen(tmp) - mods->preci : (unsigned long)ft_strlen(tmp) - mods->preci;
-//		if (len < 0)
-//			len = 0;
-//		printf("--- len = %ld\n", len);
+	//		len = (unsigned long)ft_strlen(tmp); 
+			len = (mods->flag[0] > 0 && mods->preci < (unsigned long)\
+				ft_strlen(tmp)) ? mods->preci : (unsigned long)ft_strlen(tmp);
 		x = ft_strsub((char const*) tmp, 0, (size_t)len);
 //		printf("~~~~~~~ X = %s\n", tmp);
+//		printf("%lu\n", len);
 		if (mods->flag[3] == 0)
 			width_n_c(mods, len, 'c');
-//		if (mods->flag[4] > 0) // only for signed #
-//			mods->store->buf[mods->i++] = '+';
-//		if (mods->flag[5] > 0 && mods->flag[4] == 0) // only for signed #
-//			mods->store->buf[mods->i++] = ' ';
-		if (mods->preci > 0)
-			x[mods->preci] = '\0';
+//		if (mods->preci > 0)
+//			x[mods->preci + 1] = '\0';
 		while (*x)
+		{
 			mods->store->buf[mods->i++] = *x++;
+		}
 		if (mods->flag[3] > 0)
 			width_n_c(mods, len, 'c');
 //		printf("printout:%s\n", mods->store->buf);

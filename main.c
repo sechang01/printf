@@ -14,9 +14,19 @@ int		main(void)
 	ft_printf("%.p, %.0p", s, s);
 	printf("\n");
 */
-	printf("%");
+//	printf("%-5.3s", "LYDI");
 //	printf("\n");
-	ft_printf("%");
+//	ft_printf("%-5.3s", "LYDI");
+//	printf("\n");
+
+	printf("%s", "abc");
+	printf("\n");
+	ft_printf("%s", "abc");
+	printf("\n");
+
+//	printf("%ls", L"@@");
+//	printf("\n");
+//	ft_printf("%ls", L"@@");
 //	printf("\n");
 	
 /*
