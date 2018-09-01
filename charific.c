@@ -6,94 +6,84 @@
 /*   By: sechang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/19 17:38:34 by sechang           #+#    #+#             */
-/*   Updated: 2018/08/31 22:23:39 by sechang          ###   ########.fr       */
+/*   Updated: 2018/09/01 13:10:45 by sechang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void		printf_c(t_flag *mods)
+void			printf_c(t_flag *mods)
 {
-			unsigned char 	x;             // 4 bytes for unicode
+	unsigned char	x;
 
-//			printf("Entering printf.c\n");
-//			width_n_c(mods, 1, 'a');
-			if (mods->flag[10] != '%')
-				x = (unsigned char)(va_arg(mods->vg, int));
-			else
-			{
-//				initzero(mods);
-				mods->preci = 0;
-				//chrfmt(mods, 0, 'c');
-				x = '%';
-			}
-			if (!x)
-			{
-				mods->preci = 1;
-			}
-			if (mods->flag[3] == 0)
-			{
-				width_n_c(mods, 1, 'n');
-			}
-			mods->store->buf[mods->i++] = x;
-			if (mods->flag[3] > 0)
-				width_n_c(mods, 1, 'n');
-
-//			printf("printout:%s\n", mods->store->buf);
+	if (mods->flag[10] != '%')
+		x = (unsigned char)(va_arg(mods->vg, int));
+	else
+	{
+		mods->preci = 0;
+		x = '%';
+	}
+	if (!x)
+		mods->preci = 1;
+	if (mods->flag[3] == 0)
+		width_n_c(mods, 1, 'n');
+	mods->store->buf[mods->i++] = x;
+	if (mods->flag[3] > 0)
+		width_n_c(mods, 1, 'n');
 }
 
-void		printf_s(t_flag *mods)
+static void		inner_process_s(t_flag *mods, char *tmp,
+					unsigned long *len)
 {
-		char			*x;
-		char			*tmp;
-		unsigned long	len;
-		unsigned long	i;
+	char			*x;
+	int				i;
 
-		i = 0;
-		x = NULL;
-		if (mods->flag[7] > 0)
-		{
-			printf_big_s(mods);
-			return;
-		}
-//		printf("Entering printf.s\n");
-//		printf("matchflag3 = %d", mods->flag[3]);
-		tmp = va_arg(mods->vg, char *);
-		if (!tmp)
-		{
-			ft_strcpy(&(mods->store->buf[mods->i]), "(null)");
-			mods->i = mods->i + 6;
-			return ;
-		}
-//		printf("~~~~~~~ tmp = %s\n", tmp);
-		if ((unsigned long)ft_strlen(tmp) == 0)
-			len = 0;
-		else
-	//		len = (unsigned long)ft_strlen(tmp); 
-			len = (mods->flag[0] > 0 && mods->preci < (unsigned long)\
-				ft_strlen(tmp)) ? mods->preci : (unsigned long)ft_strlen(tmp);
-		x = ft_strsub((char const*) tmp, 0, (size_t)len);
-//		printf("~~~~~~~ X = %s\n", tmp);
-//		printf("%lu\n", len);
-		if (mods->flag[3] == 0)
-			width_n_c(mods, len, 'c');
-//		if (mods->preci > 0)
-//			x[mods->preci + 1] = '\0';
-		while (*x)
-		{
-			mods->store->buf[mods->i++] = *x++;
-		}
-		if (mods->flag[3] > 0)
-			width_n_c(mods, len, 'c');
-//		printf("printout:%s\n", mods->store->buf);
+	x = NULL;
+	i = 0;
+	if ((unsigned long)ft_strlen(tmp) == 0)
+		*len = 0;
+	else
+		*len = (mods->flag[0] > 0 && mods->preci < (unsigned long)
+			ft_strlen(tmp)) ? mods->preci : (unsigned long)ft_strlen(tmp);
+	x = ft_strsub((char const*)tmp, 0, (size_t)(*len));
+	if (!mods->flag[3])
+		width_n_c(mods, *len, 'c');
+	while (x[i])
+	{
+		mods->store->buf[mods->i++] = x[i];
+		i++;
+	}
+	if (mods->flag[3] > 0)
+		width_n_c(mods, *len, 'c');
+	free(x);
+	
 }
 
-void		printf_big_s(t_flag *mods)
+void			printf_s(t_flag *mods)
 {
-			wchar_t 	*x;             // 4 bytes for unicode
+	char			*tmp;
+	unsigned long	len;
 
-//			width_n_c(mods, 1, 'n');
-			x = (va_arg(mods->vg, wchar_t *));
-			while (*x)
-				mods->store->buf[mods->i++] = *x++;
+	if (mods->flag[7] > 0)
+	{
+		printf_big_s(mods);
+		return ;
+	}
+	tmp = va_arg(mods->vg, char *);
+	if (!tmp)
+	{
+		ft_strcpy(&(mods->store->buf[mods->i]), "(null)");
+		mods->i = mods->i + 6;
+		return ;
+	}
+	inner_process_s(mods, tmp, &len);
+}
+
+void			printf_big_s(t_flag *mods)
+{
+	wchar_t		*x;
+
+	x = (va_arg(mods->vg, wchar_t *));
+	while (*x)
+		mods->store->buf[mods->i++] = *x++;
 }

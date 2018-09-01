@@ -6,7 +6,7 @@
 /*   By: sechang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/16 12:55:47 by sechang           #+#    #+#             */
-/*   Updated: 2018/08/31 17:41:49 by sechang          ###   ########.fr       */
+/*   Updated: 2018/09/01 12:31:10 by sechang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,9 @@ static t_type	g_type[] = \
 	{'C', &printf_c},
 	{'s', &printf_s},
 	{'S', &printf_big_s},
-
 	{'p', &printf_x},
 	{'d', &printf_d},
 	{'D', &printf_d},
-
 	{'i', &printf_d},
 	{'o', &printf_o},
 	{'O', &printf_o},
@@ -38,10 +36,11 @@ static t_type	g_type[] = \
 	{'x', &printf_x},
 	{'X', &printf_x},
 	{'%', &printf_c},
-//	{0, 0}
-
-//	{'n', &printf_n},
-//	{'m', &printf_m},
+	{0, 0}
 };
 
+static char		*g_hex_upp = "0123456789ABCDEF";
+static char		*g_hex_low = "0123456789abcdef";
+
 #endif
+

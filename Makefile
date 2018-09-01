@@ -6,7 +6,7 @@
 #    By: sechang <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/15 16:05:33 by sechang           #+#    #+#              #
-#    Updated: 2018/08/31 22:22:55 by sechang          ###   ########.fr        #
+#    Updated: 2018/09/01 12:10:16 by sechang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,9 @@ SRC = ft_printf.c \
 	  fmtr.c \
 	  charific.c \
 	  numeric.c \
-	  octdechex.c \
+	  printf_u.c \
+	  printf_o.c \
+	  printf_x.c \
 	  itoabase.c \
 	  ft_bzero.c \
 	  ft_get_intlen.c \
@@ -35,7 +37,6 @@ $(NAME):
 	gcc $(FLAGS) -c $(SRC)
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)	
-#	gcc $(FLAGS) main.c $(SRC) $(NAME)
 	
 clean:
 	/bin/rm -f $(OBJ)

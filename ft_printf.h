@@ -6,7 +6,7 @@
 /*   By: sechang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/15 16:48:40 by sechang           #+#    #+#             */
-/*   Updated: 2018/08/31 22:21:01 by sechang          ###   ########.fr       */
+/*   Updated: 2018/09/01 12:09:40 by sechang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 # include <stdarg.h>
 # include <stddef.h>
 # include <stdlib.h>
+# include <unistd.h>
 # include <stdio.h>
 # include <locale.h>
 # define BUFF_SIZE 10000
 
-typedef struct		s_printbuf              
+typedef struct		s_printbuf
 {
 	char			buf[BUFF_SIZE + 1];
 	int				len;
@@ -34,12 +35,12 @@ typedef struct		s_flag
 	va_list			vg;
 	char			space;
 	t_printbuf		*store;
-}					t_flag;	
+}					t_flag;
 
 int					ft_printf(const char *s, ...);
 void				initzero(t_flag *mods);
 t_flag				chrfmt(t_flag *match, char c, char key);
-int					parse(char **s, t_flag *mods);
+void				parse(char **s, t_flag *mods);
 int					flag_found(char c);
 int					len_found(char c);
 int					fmt_found(char c);
@@ -47,7 +48,7 @@ int					width_n_c(t_flag *mods, unsigned long long len, char key);
 char				*itoabase(unsigned long long n, int base, char key);
 size_t				get_intlen(unsigned long long n, int base);
 char				*imax_itoa(intmax_t n);
-size_t				long_get_intlen(intmax_t n);
+size_t				imax_get_intlen(intmax_t n);
 char				*numx(t_flag *mods);
 char				*ouxx(t_flag *mods, int base, char key);
 unsigned long		preci(t_flag *mods, unsigned long len);
