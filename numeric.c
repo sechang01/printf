@@ -6,7 +6,7 @@
 /*   By: sechang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 18:02:51 by sechang           #+#    #+#             */
-/*   Updated: 2018/08/31 22:19:33 by sechang          ###   ########.fr       */
+/*   Updated: 2018/08/31 22:28:05 by sechang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void		printf_d(t_flag *mods)
 		unsigned long long		newlen;
 
 // Read in argument, store into x as char *
-		printf("flags=%d\n", mods->flag[10]);
+//		printf("flags=%d\n", mods->flag[10]);
 		x = (mods->flag[10] == 'D') ? imax_itoa(va_arg(mods->vg, long)) : \
 			numx(mods); //ft_itoa(va_arg(mods->vg, int));
 //		printf("x=%s\n", x);
 // Find string length of char *
-		printf("s= %s", x);
+//		printf("s= %s", x);
 		len = (unsigned long long)ft_strlen(x);
 		if (len == 1 && x[0] == '0' && mods->flag[11] == 0 && mods->flag[4] == 0 && mods->preci == 0)
 		{
