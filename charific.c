@@ -6,7 +6,7 @@
 /*   By: sechang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/19 17:38:34 by sechang           #+#    #+#             */
-/*   Updated: 2018/09/01 13:10:45 by sechang          ###   ########.fr       */
+/*   Updated: 2018/09/01 13:15:14 by sechang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ static void		inner_process_s(t_flag *mods, char *tmp,
 	if (mods->flag[3] > 0)
 		width_n_c(mods, *len, 'c');
 	free(x);
-	
 }
 
 void			printf_s(t_flag *mods)
