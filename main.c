@@ -14,10 +14,10 @@ int		main(void)
 	ft_printf("%.p, %.0p", s, s);
 	printf("\n");
 */
-	printf("%D", 0);
-	printf("\n");
-	ft_printf("%D", 0);
-	printf("\n");
+	printf("%");
+//	printf("\n");
+	ft_printf("%");
+//	printf("\n");
 	
 /*
 	int		SHRT_MAX;
