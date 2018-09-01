@@ -6,7 +6,7 @@
 /*   By: sechang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 18:06:40 by sechang           #+#    #+#             */
-/*   Updated: 2018/08/29 22:23:22 by sechang          ###   ########.fr       */
+/*   Updated: 2018/08/31 18:44:10 by sechang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int		flag_found(char c)
 
 int		len_found(char c)
 {
-	return (c == 'h' || c == 'l' || c == 'j' || c == 'z');
+	return (c == '.' || c == 'h' || c == 'l' || c == 'j' || c == 'z');
 }
 
 int		fmt_found(char c)

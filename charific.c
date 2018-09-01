@@ -6,7 +6,7 @@
 /*   By: sechang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/19 17:38:34 by sechang           #+#    #+#             */
-/*   Updated: 2018/08/30 22:54:50 by sechang          ###   ########.fr       */
+/*   Updated: 2018/08/31 18:14:33 by sechang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,16 @@ void		printf_c(t_flag *mods)
 			if (mods->flag[10] != '%')
 				x = (unsigned char)(va_arg(mods->vg, int));
 			else
+			{
+//				initzero(mods);
+				mods->preci = 0;
+				//chrfmt(mods, 0, 'c');
 				x = '%';
+			}
+			if (!x)
+			{
+				mods->preci = 1;
+			}
 			if (mods->flag[3] == 0)
 			{
 				width_n_c(mods, 1, 'n');
@@ -45,6 +54,12 @@ void		printf_s(t_flag *mods)
 //		printf("Entering printf.s\n");
 //		printf("matchflag3 = %d", mods->flag[3]);
 		tmp = va_arg(mods->vg, char *);
+		if (!tmp)
+		{
+			ft_strcpy(&(mods->store->buf[mods->i]), "(null)");
+			mods->i = mods->i + 6;
+			return ;
+		}
 //		printf("~~~~~~~ tmp = %s\n", tmp);
 		if ((unsigned long)ft_strlen(tmp) == 0)
 			len = 0;

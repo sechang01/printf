@@ -6,7 +6,7 @@
 /*   By: sechang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/15 15:15:24 by sechang           #+#    #+#             */
-/*   Updated: 2018/08/30 22:54:53 by sechang          ###   ########.fr       */
+/*   Updated: 2018/08/31 18:52:54 by sechang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,11 @@ int		parse(char **s, t_flag *mods)
 //				printf("Flag Found: %c\n", *(*s));
 				chrfmt(mods, *(*s), 'a');
 //				printf("mods->flag[0]=%d\n", mods->flag[0]);
+//				printf("mods->flag[1]=%d\n", mods->flag[1]);
+//				printf("mods->flag[2]=%d\n", mods->flag[2]);
 //				printf("mods->flag[3]=%d\n", mods->flag[3]);
+//				printf("mods->flag[4]=%d\n", mods->flag[4]);
+//				printf("mods->flag[5]=%d\n", mods->flag[5]);
 				(*s)++;
 			}
 //			printf("Flag:%c\n", mods->flag[*s-1]);
@@ -62,6 +66,10 @@ int		parse(char **s, t_flag *mods)
 			{
 //				printf("*s= %s\n", s);
 //				printf("Precision Width\n");
+				mods->flag[0]++;
+//				printf("%d\n", mods->flag[0]);
+				if (!ft_isdigit(*(*s)))
+					mods->flag[0]++;
 				while (ft_isdigit(*(*s)))
 				{
 					mods->preci *= 10;

@@ -2,11 +2,33 @@
 
 int		main(void)
 {
-	printf("%03.2d", -1);
-	printf("\n");
-	ft_printf("%03.2d", -1);
-	printf("\n");
+//	printf("%s", imax_itoa(9223372036854775807));
+	char	*s;	
+	s = 0;
+	long		USHRT_MAX;
 
+	USHRT_MAX = 100;
+/*
+	printf("%.p, %.0p", s, s);
+	printf("\n");
+	ft_printf("%.p, %.0p", s, s);
+	printf("\n");
+*/
+	printf("%D", 0);
+	printf("\n");
+	ft_printf("%D", 0);
+	printf("\n");
+	
+/*
+	int		SHRT_MAX;
+
+	SHRT_MAX = 2780215158880;
+
+	printf("%hhu / %hhu", SHRT_MAX - 42, SHRT_MAX - 4200);
+	printf("\n");
+	ft_printf("%hhu / %hhu", SHRT_MAX - 42, SHRT_MAX - 4200);
+	printf("\n");
+*/
 /*	printf("hello%C\n", L'ø');
 	ft_printf("hello%C\n", L'ø');
 

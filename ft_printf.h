@@ -6,7 +6,7 @@
 /*   By: sechang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/15 16:48:40 by sechang           #+#    #+#             */
-/*   Updated: 2018/08/30 16:26:18 by sechang          ###   ########.fr       */
+/*   Updated: 2018/08/31 18:10:38 by sechang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int					width_n_c(t_flag *mods, unsigned long long len, char key);
 char				*itoabase(unsigned long long n, int base, char key);
 size_t				get_intlen(unsigned long long n, int base);
 char				*imax_itoa(intmax_t n);
-size_t				long_get_intlen(unsigned long long n);
+size_t				long_get_intlen(intmax_t n);
 char				*numx(t_flag *mods);
 char				*ouxx(t_flag *mods, int base, char key);
 unsigned long		preci(t_flag *mods, unsigned long len);

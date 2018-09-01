@@ -6,7 +6,7 @@
 /*   By: sechang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/21 19:07:47 by sechang           #+#    #+#             */
-/*   Updated: 2018/08/30 17:11:42 by sechang          ###   ########.fr       */
+/*   Updated: 2018/08/31 19:22:43 by sechang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,8 @@ void		printf_u(t_flag *mods)
 {
 		char	*x;
 		unsigned long	len;
-		unsigned long	i;
+		unsigned long 	newlen;
 
-		i = 0;
 		x = NULL;
 		if (mods->flag[10] == 'U')
 			x = itoabase(va_arg(mods->vg,unsigned long long), 10, 'a');
@@ -29,8 +28,21 @@ void		printf_u(t_flag *mods)
 		else if (mods->flag[10] == 'u')
 			x = itoabase(va_arg(mods->vg, unsigned int), 10, 'a');
 		len = (unsigned long)ft_strlen(x);
+
+		if (len == 1 && x[0] == '0' && mods->flag[11] == 0 && mods->flag[4] == 0 && mods->preci == 0 && mods->flag[1] == 0)
+		{
+			if (mods->width == 0 && mods->preci == 0 && mods->flag[0] > 0 && mods->flag[1] == 0)
+				return ;
+			else if (mods->width > 0 && mods->preci == 0 && mods->flag[0] > 0)
+				x[0] = ' ';
+		}
+
+		newlen = len;
+		if (mods->preci > len)
+			newlen = newlen + (mods->preci - len);
 		if (mods->flag[3] == 0)
-			width_n_c(mods, len, 'n');
+			width_n_c(mods, newlen, 'n');
+		len = preci(mods, len);
 		while (*x) // && ((mods->preci)) && i++ <= mods->preci)	
 			mods->store->buf[mods->i++] = *x++;
 		if (mods->flag[3] > 0)
@@ -55,8 +67,19 @@ void		printf_o(t_flag *mods)
 //		printf("~~~~~~tmp=%s\n", x);
 		len = (unsigned long)ft_strlen(x);
 
+
+
+		if (len == 1 && x[0] == '0' && mods->flag[11] == 0 && mods->flag[4] == 0 && mods->preci == 0 && mods->flag[1] == 0)
+		{
+			if (mods->width == 0 && mods->preci == 0 && mods->flag[0] > 0 && mods->flag[1] == 0)
+				return ;
+			else if (mods->width > 0 && mods->preci == 0 && mods->flag[0] > 0)
+				x[0] = ' ';
+		}
+
+
 		if (mods->flag[1] > 0 && x[0] != '0')
-			len = len + 1;
+			len++;
 		if (mods->flag[3] == 0)
 			(len > mods->preci) ? width_n_c(mods, len, 'n') : width_n_c(\
 				mods, mods->preci, 'n');
@@ -82,37 +105,44 @@ void		printf_x(t_flag *mods)
 {
 		char	*x;
 		unsigned long	len;
-		unsigned long	i;
+		unsigned long 	newlen;
 
-		i = 0;
-		if (mods->flag[11] == 1)
-			x = ouxx(mods, 16, (mods->flag[10] == 'x' || mods->flag[10] == \
+		if (mods->flag[11] == 1 || mods->flag[10] == 'p')
+			x = ouxx(mods, 16, (mods->flag[10] == 'x' || mods->flag[10] ==\
 				'p') ? 'a' : 'A');
 		else
 			x = itoabase((unsigned long long)va_arg(mods->vg, unsigned int), \
 				16, mods->flag[10] == 'x' || mods->flag[10] == 'p' ? 'a' : 'A');
-//		if (mods->flag[1] && mods->flag[0] && mods->preci == 0 && *x == '0')
-//			return;
 		len = (unsigned long long)ft_strlen(x);
-		if (mods->flag[1] > 0 && x[0] != '0')
-			len = len + 2;
+		
+		if (len == 1 && x[0] == '0' && mods->flag[11] == 0 && mods->flag[4] == 0 && mods->preci == 0)
+		{
+			if (mods->width == 0 && mods->preci == 0 && mods->flag[0] > 0)
+				return ;
+			else if (mods->width > 0 && mods->preci == 0 && mods->flag[0] > 0)
+				x[0] = ' ';
+		}
+		newlen = len;
+		if ((mods->flag[1] > 0 && x[0] != '0') || mods->flag[10] == 'p')
+			newlen = newlen + 2;
+		if (mods->preci > len)
+			newlen = newlen + (mods->preci - len);
 		if (mods->flag[3] == 0 && mods->flag[2] == 0)
-			width_n_c(mods, len, 'a');
-		if (mods->flag[1] > 0 && x[0] != '0')
+			width_n_c(mods, newlen, 'a');
+		if ((mods->flag[1] > 0 && x[0] != '0') || mods->flag[10] == 'p')
 		{
 			mods->store->buf[mods->i++] = '0';
 			if (mods->flag[10] == 'X')
 				mods->store->buf[mods->i++] = 'X';
-			else if (mods->flag[10] == 'x')
+			else if (mods->flag[10] == 'x' || mods->flag[10] == 'p')
 				mods->store->buf[mods->i++] = 'x';
 		}
 		if (mods->flag[3] == 0 && mods->flag[2] > 0)
-			width_n_c(mods, len, 'a');
-		while (*x)// && ((mods->preci)) && i++ <= mods->preci)
-		{
+			width_n_c(mods, newlen, 'a');
+		len = preci(mods, len);
+		while (*x)
 			mods->store->buf[mods->i++] = *x++;
-		}
 		if (mods->flag[3] > 0)
-			width_n_c(mods, len, 'a');
+			width_n_c(mods, newlen, 'a');
 }
 

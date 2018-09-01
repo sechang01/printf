@@ -6,7 +6,7 @@
 /*   By: sechang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 20:18:57 by sechang           #+#    #+#             */
-/*   Updated: 2018/08/29 20:26:19 by sechang          ###   ########.fr       */
+/*   Updated: 2018/08/31 15:29:26 by sechang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*itoabase(unsigned long long n, int base, char key)
 	return (str);
 }
 
-size_t	long_get_intlen(unsigned long long n)
+size_t	long_get_intlen(intmax_t n)
 {
 	size_t	i;
 
@@ -69,16 +69,16 @@ size_t	long_get_intlen(unsigned long long n)
 
 char	*imax_itoa(intmax_t n)
 {
-	char	*str;
-	int		i;
+	char		*str;
+	int			i;
 	intmax_t	n_cpy;
-	size_t	len;
+	size_t		len;
 
-	if (n == -2147483648)
-		return (ft_strcpy((char *)malloc(sizeof(char) * 11), "-2147483648"));
+	if (n == -9223372036854775807 - 1)
+		return (ft_strcpy((char *)malloc(sizeof(char) * 21), "-9223372036854775808"));
 	i = 0;
 	n_cpy = n;
-	len = ft_get_intlen(n);
+	len = long_get_intlen(n);
 	if (n < 0)
 	{
 		n_cpy = -n;
